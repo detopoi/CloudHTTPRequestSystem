@@ -1,5 +1,7 @@
 import json
 import logging
+import random
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 from http.server import HTTPServer
 from io import BytesIO
@@ -19,15 +21,46 @@ logging.basicConfig(
 class MaintainBiz():
 
     @staticmethod
+    def generate_user_id():
+        date_str = datetime.now().strftime("%Y%m%d")
+        random_num = random.randint(10000000, 99999999)
+        return f"{date_str}{random_num}"
+
+    @staticmethod
     def register_user(**user_info):
         """ 自助注册新用户
 
         @param user_info 用户信息
         @return 注册成功与否
         """
+        name, username, password, email, phone_number, description = (
+            user_info.get('name'), user_info.get("username"), user_info.get("password"),
+            user_info.get("email"), user_info.get("phone_number"), user_info.get("description")
+        )
 
-        # TODO
-        return {'status': 'success', 'message':''}
+        if not all([name, username, password, email, phone_number]):
+            return {'status': 'fail', 'message': '缺少必要信息'}
+
+        user_id = MaintainBiz.generate_user_id()
+        user_data = {
+            "name": name,
+            "user_id": user_id,
+            "username": username,
+            "password": password,
+            "email": email,
+            "phone_number": phone_number,
+            "description": description
+        }
+
+        # 保存用户信息到文件
+        file_path = f"./user_data/USER-{user_id}.json"
+        try:
+            with open(file_path, 'w') as user_file:
+                json.dump(user_data, user_file, indent=4)
+        except Exception as e:
+            return {'status': 'fail', 'message': str(e)}
+
+        return {'status': 'success', 'message': "创建成功, 账号信息: "+str(user_data)}
 
     @staticmethod
     def query_user_info(user_id):
@@ -106,5 +139,9 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(response.getvalue())
 
 
-httpd = HTTPServer(('localhost', 8000), MyHTTPRequestHandler)
-httpd.serve_forever()
+if __name__ == '__main__':
+    httpd = HTTPServer(('localhost', 8000), MyHTTPRequestHandler)
+    httpd.serve_forever()
+
+
+
