@@ -1,6 +1,8 @@
 import json
 import logging
 import random
+import os
+import zipfile
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 from http.server import HTTPServer
@@ -19,12 +21,74 @@ logging.basicConfig(
 
 
 class MaintainBiz():
+    database_folder = "database_user"
+    user_folder = "user_data"
+    script_directory = "scripts"
+    today_database = {}
+    today_ids = {}
+
+    def __init__(self):
+        MaintainBiz.get_today_user_data()
+
+    @staticmethod
+    def ensure_database_folder():
+        """ 检查数据库路径
+        """
+        if not os.path.exists(MaintainBiz.database_folder):
+            os.makedirs(MaintainBiz.database_folder)
+
+    @staticmethod
+    def ensure_script_folder():
+        """ 检查脚本路径
+        """
+        if not os.path.exists(MaintainBiz.script_directory):
+            os.makedirs(MaintainBiz.script_directory)
+
+    @staticmethod
+    def get_today_user_data():
+        """ 读取今日注册用户
+        """
+        today_date = datetime.now().strftime("%Y%m%d")
+        file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
+
+        if not os.path.exists(file_path):
+            MaintainBiz.today_ids, MaintainBiz.today_database = set(), set()
+            # return set(), set()  # 返回空集合，表示没有用户
+
+        with open(file_path, 'r') as user_file:
+            data = json.load(user_file)
+            MaintainBiz.today_ids, MaintainBiz.today_database = \
+                set(data.get('user_ids', [])), set(data.get('usernames', []))
+            # return set(data.get('user_ids', [])), set(data.get('usernames', []))
+
+    @staticmethod
+    def save_today_user_data(user_ids, usernames):
+        """ 保存今日总用户
+        """
+        today_date = datetime.now().strftime("%Y%m%d")
+        file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
+
+        data = {'user_ids': list(user_ids), 'usernames': list(usernames)}
+
+        with open(file_path, 'w') as user_file:
+            json.dump(data, user_file, indent=4, ensure_ascii=False)
 
     @staticmethod
     def generate_user_id():
+        """ 生成新用户id
+        """
         date_str = datetime.now().strftime("%Y%m%d")
         random_num = random.randint(10000000, 99999999)
         return f"{date_str}{random_num}"
+
+    @staticmethod
+    def is_username_taken(username):
+        """ 用户名是否已存在
+        """
+        MaintainBiz.get_today_user_data()
+        return username in MaintainBiz.today_database
+        # _, usernames = MaintainBiz.today_ids, MaintainBiz.today_database
+        # return username in usernames
 
     @staticmethod
     def register_user(**user_info):
@@ -41,6 +105,10 @@ class MaintainBiz():
         if not all([name, username, password, email, phone_number]):
             return {'status': 'fail', 'message': '缺少必要信息'}
 
+        # 检查用户名唯一性
+        if MaintainBiz.is_username_taken(username):
+            return {'status': 'fail', 'message': '用户名已被使用'}
+
         user_id = MaintainBiz.generate_user_id()
         user_data = {
             "name": name,
@@ -56,9 +124,16 @@ class MaintainBiz():
         file_path = f"./user_data/USER-{user_id}.json"
         try:
             with open(file_path, 'w') as user_file:
-                json.dump(user_data, user_file, indent=4)
+                json.dump(user_data, user_file, indent=4, ensure_ascii=False)
         except Exception as e:
             return {'status': 'fail', 'message': str(e)}
+
+        # 更新用户ID和用户名集合
+        MaintainBiz.get_today_user_data()
+        user_ids, usernames = MaintainBiz.today_ids, MaintainBiz.today_database
+        user_ids.add(user_id)
+        usernames.add(username)
+        MaintainBiz.save_today_user_data(user_ids, usernames)
 
         return {'status': 'success', 'message': "创建成功, 账号信息: "+str(user_data)}
 
@@ -69,19 +144,30 @@ class MaintainBiz():
         @param user_id 用户ID
         @return 用户信息详情
         """
-
-        # TODO
+        for user_data in os.listdir('./user_data'):
+            data_id = user_data[13:21]
+            if str(user_id) == data_id:
+                file_path = os.path.join(MaintainBiz.user_folder, user_data)
+                try:
+                    with open(file_path, 'r') as user_file:
+                        data = json.load(user_file)
+                except Exception as e:
+                    return {"Error": str(e)}
+                return data
         return {}
 
     @staticmethod
     def process_maintain_script(**kwargs):
         """ 执行运维任务
+        运维人员会上传script脚本用于用于自动化运维，假设上传的script脚本已经压缩为zip格式并保存到服务器上，该操作只需要将zip解压后将脚本归档到到目录下。
 
         @param kwargs 待执行的运维脚本，脚本参数, 执行用户 {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
         @return 成功与否 {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
         """
+
+
         # TODO
-        return {'status': 'success', 'message':''}
+        return {'status': 'success', 'message': 'Yeah!'}
 
     @staticmethod
     def upload_script(**kwargs):
@@ -92,7 +178,7 @@ class MaintainBiz():
         """
 
         # TODO
-        return {'status': 'success', 'message':''}
+        return {'status': 'success', 'message': 'Yeah!'}
 
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
