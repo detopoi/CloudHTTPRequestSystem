@@ -144,30 +144,20 @@ class MaintainBiz():
         @param user_id 用户ID
         @return 用户信息详情
         """
+        user_id = str(user_id)
+        if len(user_id) != 8:
+            return {'status': 'fail', 'message': f"Wrong id format, expect 8 digits but got {len(user_id)}"}
         for user_data in os.listdir('./user_data'):
             data_id = user_data[13:21]
-            if str(user_id) == data_id:
+            if user_id == data_id:
                 file_path = os.path.join(MaintainBiz.user_folder, user_data)
                 try:
                     with open(file_path, 'r') as user_file:
                         data = json.load(user_file)
                 except Exception as e:
-                    return {"Error": str(e)}
-                return data
-        return {}
-
-    @staticmethod
-    def process_maintain_script(**kwargs):
-        """ 执行运维任务
-        运维人员会上传script脚本用于用于自动化运维，假设上传的script脚本已经压缩为zip格式并保存到服务器上，该操作只需要将zip解压后将脚本归档到到目录下。
-
-        @param kwargs 待执行的运维脚本，脚本参数, 执行用户 {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
-        @return 成功与否 {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
-        """
-
-
-        # TODO
-        return {'status': 'success', 'message': 'Yeah!'}
+                    return {'status': 'fail', 'message': "Error: "+str(e)}
+                return {'status': 'success', 'message': data}
+        return {'status': 'fail', 'message': "User not found"}
 
     @staticmethod
     def upload_script(**kwargs):
@@ -175,6 +165,39 @@ class MaintainBiz():
 
         @param kwargs  {'script_name':xxxx, 'user_id': id}
         @return 成功与否
+        """
+
+        script_name = kwargs.get('script_name')
+        args = kwargs.get('args')
+        user_id = kwargs.get('user_id')
+
+        if MaintainBiz.query_user_info(user_id)["status"] == "fail":
+            return {'status': 'fail', 'message': 'User not found'}
+
+        zip_file_path = f"./uploads/{script_name}"
+        if not os.path.exists(zip_file_path):
+            return {'status': 'fail', 'message': 'Script file not found'}
+
+        MaintainBiz.ensure_script_folder()
+        try:
+            with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+                zip_ref.extractall(MaintainBiz.script_directory)
+        except Exception as e:
+            return {'status': 'fail', 'message': str(e)}
+
+        return {'status': 'success',
+                'message': str({
+                    'script_name': script_name,
+                    'args': args,
+                    'user_id': user_id})
+                }
+
+    @staticmethod
+    def process_maintain_script(**kwargs):
+        """ 执行运维任务, 将zip解压后将脚本归档到到目录下。
+
+        @param kwargs 待执行的运维脚本，脚本参数, 执行用户 {'script_name': xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
+        @return 成功与否 {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
         """
 
         # TODO

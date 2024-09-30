@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 
 if __name__ == '__main__':
     while True:
+        print("-----------------------------------------------------------------------------------")
         print("输入新注册:用户名")
         username = input()
         url = "http://localhost:8000/register_user"
@@ -26,8 +27,22 @@ if __name__ == '__main__':
         response = requests.post(url, json=data)
         print(response.json())
 
+        print("-----------------------------------------------------------------------------------")
         print("输入要查询的用户id")  # 51367338
         userid = input()
         url = "http://localhost:8000/query_user_info"
         response = requests.post(url, json={"user_id": userid})
         print(response.json())
+
+        print("-----------------------------------------------------------------------------------")
+        print("是否尝试解压(y/s):")
+        is_unzip = input().lower()
+        if is_unzip == "y":
+            print("输入解压用户id:")
+            userid = input()
+            url = "http://localhost:8000/upload_script"
+            response = requests.post(url, json={"script_name": "test.zip", "user_id": userid})
+            print(response.json())
+
+
+
