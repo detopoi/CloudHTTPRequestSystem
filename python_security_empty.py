@@ -134,11 +134,13 @@ class MaintainBiz():
 
     @staticmethod
     def query_user_info(user_id):
-        """ 查询用户信息
+        """ Propose a query of user information
 
-        @param user_id 用户ID
-        @return 用户信息详情
+        @param user_id
+        @return: details of user's information
         """
+        if type(user_id) == list:
+            user_id = user_id[0]
         user_id = str(user_id)
         if len(user_id) != 8:
             return {'status': 'fail', 'message': f"Wrong id format, expect 8 digits but got {len(user_id)}"}
@@ -156,10 +158,10 @@ class MaintainBiz():
 
     @staticmethod
     def upload_script(**kwargs):
-        """ 上传运维script脚本, 将zip解压后将脚本归档到到目录下。
+        """ Upload the zip of the script, and unzip to the content
 
-        @param kwargs  {'script_name':xxxx, 'user_id': id}
-        @return 成功与否
+        @param kwargs {'script_name': xxxx, 'user_id': id}
+        @return: 'success'/'fail'
         """
 
         script_name = kwargs.get('script_name')
@@ -195,28 +197,30 @@ class MaintainBiz():
 
     @staticmethod
     def process_maintain_script(**kwargs):
-        """ 执行运维任务
+        """ Execute test tasks
 
-        @param kwargs 待执行的运维脚本, 脚本参数, 执行用户 {'script_name': xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
-        @return 成功与否 {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
+        @param kwargs: executing script, parameters, executing user {'script_name': xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
+        @return: 'success'/'fail' {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
         """
         script_name = kwargs.get('script_name')
         user_id = kwargs.get('user_id')
-        args = kwargs.get('args')
+        args = kwargs.get('args', {})
 
         if not os.path.exists(f"scripts/{script_name}"):
             return {'status': 'fail', 'message': 'Script file not found'}
 
+        command = ['bash', f"scripts/{script_name}"] + [f"--{key}={value}" for key, value in args.items()]
+
         try:
-            command = [script_name] + args
-            result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            result = subprocess.run(command, capture_output=True, text=True, check=True)
             output = result.stdout
-            error = result.stderr
             MaintainBiz.log_operation(user_id, script_name, f"Executed successfully. Output: {output}")
             return {"status": 'success', "message": output}
-        except subprocess.CalledProcessError as e:
-            MaintainBiz.log_operation(user_id, script_name, f"Execution failed. Error: {e.stderr}")
-            return {'status': 'fail', 'message': e.stderr}
+        except Exception as e:
+            error_message = str(e)
+            print(f"Command failed with error: {error_message}")
+            MaintainBiz.log_operation(user_id, script_name, f"Execution failed. Error: {error_message}")
+            return {'status': 'fail', 'message': error_message}
 
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -266,6 +270,3 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     httpd = HTTPServer(('localhost', 8000), MyHTTPRequestHandler)
     httpd.serve_forever()
-
-
-

@@ -44,5 +44,17 @@ if __name__ == '__main__':
             response = requests.post(url, json={"script_name": "test.zip", "user_id": userid})
             print(response.json())
 
-
-
+        print("-----------------------------------------------------------------------------------")
+        print("输入测试用户id")  # 51367338
+        user_id = input()
+        url = "http://localhost:8000/process_maintain_script"
+        data = {
+            "script_name": "test1.sh",
+            "args": {"user_id": user_id, "script_name": "test1.sh"},
+            "user_id": user_id
+        }
+        response = requests.post(url, json=data)
+        if response.status_code == 200:
+            print("Response JSON:", response.json())
+        else:
+            print("Error:", response.status_code, response.text)
