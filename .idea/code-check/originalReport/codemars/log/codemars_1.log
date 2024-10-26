@@ -1,0 +1,60 @@
+ECHO 处于关闭状态。
+C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\jre11\bin\java.exe
+"C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\jre11\bin\java.exe" -classpath "C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\codemars\\lib\*" com.huawei.codemars.analyzer.CodeMars C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\jre11\bin\java.exe -py -source @D:\Homework\CloudHTTPRequestSystem\.idea\code-check\originalReport\codemars\report\codemars_fileList1.lst -checker BD_unzip_file_without_check_size,BD_use_logging_tool_to_record_log,BD_use_open_without_close,BD_linux_commands_wildcard_injection,BD_forbid_use_mktemp,BD_divide_by_zero,BD_forbid_use_socket_in_insecure_channel,BD_store_sensitive_data,BD_use_socket_without_close,BD_subprocess_with_shell_equals_true,BD_insecure_random_func,BD_use_return_replace_stopiter,BD_yaml_load,Public_Url_Check,BD_exception_info_leak,BD_forbid_serialize_sensitive_data,Personal_Info_Check,BD_forbid_use_dbg,BD_communicate_need_set_timeout,BD_start_process_with_environment_path,BD_try_except_ignore,BD_assert_used,BD_create_file_with_bad_permission,BD_forbid_leak_sensitive_data_in_log,BD_not_recommended_log_usage,BD_forbid_use_jsonpickle_encode,BD_forbid_negative_step_value_slice,BD_insecure_regex,BD_delete_temporary_file -output D:\Homework\CloudHTTPRequestSystem\.idea\code-check\originalReport\codemars\report\codemars1.json -pythonPath C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\python_sec\python3\win
+2024-10-25 17:53:12.636 [main] INFO . - user input: C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\jre11\bin\java.exe,-py,-source,@D:\Homework\CloudHTTPRequestSystem\.idea\code-check\originalReport\codemars\report\codemars_fileList1.lst,-checker,BD_unzip_file_without_check_size,BD_use_logging_tool_to_record_log,BD_use_open_without_close,BD_linux_commands_wildcard_injection,BD_forbid_use_mktemp,BD_divide_by_zero,BD_forbid_use_socket_in_insecure_channel,BD_store_sensitive_data,BD_use_socket_without_close,BD_subprocess_with_shell_equals_true,BD_insecure_random_func,BD_use_return_replace_stopiter,BD_yaml_load,Public_Url_Check,BD_exception_info_leak,BD_forbid_serialize_sensitive_data,Personal_Info_Check,BD_forbid_use_dbg,BD_communicate_need_set_timeout,BD_start_process_with_environment_path,BD_try_except_ignore,BD_assert_used,BD_create_file_with_bad_permission,BD_forbid_leak_sensitive_data_in_log,BD_not_recommended_log_usage,BD_forbid_use_jsonpickle_encode,BD_forbid_negative_step_value_slice,BD_insecure_regex,BD_delete_temporary_file,-output,D:\Homework\CloudHTTPRequestSystem\.idea\code-check\originalReport\codemars\report\codemars1.json,-pythonPath,C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\python_sec\python3\win
+2024-10-25 17:53:12.639 [main] INFO . - CodeMars Version:2.1.39
+2024-10-25 17:53:12.782 [main] INFO . - SecFinder-Sh doesn't exist
+2024-10-25 17:53:12.791 [main] INFO . - SecFinder-Php doesn't exist
+2024-10-25 17:53:12.793 [main] INFO . - SecFinder-Lua doesn't exist
+2024-10-25 17:53:12.793 [main] INFO . - SecFinder-Kotlin doesn't exist
+2024-10-25 17:53:12.793 [main] INFO . - SecFinder-SenInfo doesn't exist
+2024-10-25 17:53:12.794 [main] INFO . - starting analyzing.
+2024-10-25 17:53:12.800 [main] INFO . - start collecting report.
+2024-10-25 17:53:12.807 [CodeMars1] INFO . - Command: C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\python_sec\python3\win\python.exe,C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\codemars\engines\SecFinder-Py\whitzard.py,D:\Homework\CloudHTTPRequestSystem\.idea\code-check\originalReport\codemars\report\SecFinder-Py_filelist_2024_10_25_17_53_12_804_40.txt,--tool,all,--checker-enable,BD_unzip_file_without_check_size,BD_use_logging_tool_to_record_log,BD_use_open_without_close,BD_linux_commands_wildcard_injection,BD_forbid_use_mktemp,BD_divide_by_zero,BD_forbid_use_socket_in_insecure_channel,BD_store_sensitive_data,BD_use_socket_without_close,BD_subprocess_with_shell_equals_true,BD_insecure_random_func,BD_use_return_replace_stopiter,BD_yaml_load,Public_Url_Check,BD_exception_info_leak,BD_forbid_serialize_sensitive_data,Personal_Info_Check,BD_forbid_use_dbg,BD_communicate_need_set_timeout,BD_start_process_with_environment_path,BD_try_except_ignore,BD_assert_used,BD_create_file_with_bad_permission,BD_forbid_leak_sensitive_data_in_log,BD_not_recommended_log_usage,BD_forbid_use_jsonpickle_encode,BD_forbid_negative_step_value_slice,BD_insecure_regex,BD_delete_temporary_file,--output,D:\Homework\CloudHTTPRequestSystem\.idea\code-check\originalReport\codemars\report\\SecFinder-Py_errorreport_2024_10_25_17_53_12_361_98.xml,--type,codemars,-d,--python-path,C:\Users\l00906571\.hicode\CodeCheck\CodeCheckAgent\uccp-app-1.0.0\tools\python_sec\python3\win
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Load checkers...
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Start Pyinspect analyze.
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: step 1/4: find py files...
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: step 2/4: process functions...
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           total functions : 14
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 7%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 14%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 21%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 28%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 35%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 42%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 50%
+2024-10-25 17:53:13.524 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 57%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 64%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 71%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 78%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 85%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 92%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output:           progress : 100%
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: step 3/4: run analysis...
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Finish Pyinspect analyze.
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Run sensitive info check.
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Finish sensitive info check.
+2024-10-25 17:53:13.525 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Sensitive info check: 0.
+2024-10-25 17:53:14.105 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: Bandit analysis turn on ...
+2024-10-25 17:53:14.106 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: [main]	INFO	profile include tests: None
+2024-10-25 17:53:14.106 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: [main]	INFO	profile exclude tests: None
+2024-10-25 17:53:14.106 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: [main]	INFO	cli include tests: H304,H806,H103,B609,H301,H811,H606,H402,H808,H108,H605,H803,B506,H202,H403,H501,H804,H701,H201,B101,H303,H810,H805,H405,H801,H812,H302
+2024-10-25 17:53:14.106 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: [main]	INFO	cli exclude tests: None
+2024-10-25 17:53:14.106 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: [json]	INFO	JSON output written to file: *********************************m\.idea\code-check\originalReport\codemars\report\bandit_report.tmp0
+2024-10-25 17:53:14.106 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: Bandit analysis finish...
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: VERSION: 1.0.1.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:13: Output: DATE: 2023-12-28.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: Line count: 229.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: File count: 1.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: Time cost: 1.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: 0 bandit defects detected.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: 0 py_inspect defects detected.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: 0 pyprobe defects detected.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: 0 defects detected.
+2024-10-25 17:53:14.117 [Thread-1] INFO . - 2024-10-25 17:53:14: Output: Whitzard analyze finish.
+2024-10-25 17:53:14.193 [CodeMars1] INFO . - engineName: SecFinder-Py, executeTime: 1389 
+2024-10-25 17:53:14.196 [CodeMars1] INFO . - start parse errorreport xml : SecFinder-Py_errorreport_2024_10_25_17_53_12_361_98.xml
+2024-10-25 17:53:14.198 [CodeMars1] INFO . - parse xml time : 5
+2024-10-25 17:53:14.198 [CodeMars1] INFO . - end parse errorreport xml
+2024-10-25 17:53:14.209 [main] INFO . - end collecting report.
+2024-10-25 17:53:14.236 [main] INFO . - end analyzing.

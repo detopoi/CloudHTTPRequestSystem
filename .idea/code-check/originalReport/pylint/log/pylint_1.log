@@ -1,0 +1,27 @@
+D:/Homework/CloudHTTPRequestSystem/.idea/code-check\originalReport\pylint\report\filelist.conf
+Using pylint 2.13.10.7 for python 3.8.8
+pylint running on the following files:
+- D:\Homework\CloudHTTPRequestSystem/python_security_empty.py
+----
+['--rcfile=D:/Homework/CloudHTTPRequestSystem/.idea/code-check\\originalReport\\pylint\\report\\pylint.conf', '--reports=n', '--output-format=colorized', '--msg-template', '{abspath}:{line}:{column}:{msg_id}:{msg}{obj}({symbol})', '--exit-zero', 'D:\\Homework\\CloudHTTPRequestSystem/python_security_empty.py']
+************* Module python_security_empty
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:214:0:C0301:Line too long (128/120)(line-too-long)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:97:4:H3103:Duplicate string literal 'status' at line [110, 113, 133, 142].MaintainBiz.register_user(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:97:4:H3103:Duplicate string literal 'fail' at line [110, 113, 133].MaintainBiz.register_user(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:97:4:H3103:Duplicate string literal 'message' at line [110, 113, 133, 142].MaintainBiz.register_user(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:144:4:H3103:Duplicate string literal 'status' at line [155, 164, 165, 166].MaintainBiz.query_user_info(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:144:4:H3103:Duplicate string literal 'fail' at line [155, 164, 166].MaintainBiz.query_user_info(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:144:4:H3103:Duplicate string literal 'message' at line [155, 164, 165, 166].MaintainBiz.query_user_info(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:168:4:H3103:Duplicate string literal 'status' at line [180, 181, 185, 192, 194].MaintainBiz.upload_script(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:168:4:H3103:Duplicate string literal 'fail' at line [180, 181, 185, 192].MaintainBiz.upload_script(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:168:4:H3103:Duplicate string literal 'message' at line [181, 185, 192, 195].MaintainBiz.upload_script(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:210:4:H3103:Duplicate string literal 'status' at line [222, 230, 235].MaintainBiz.process_maintain_script(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:210:4:H3103:Duplicate string literal 'message' at line [222, 230, 235].MaintainBiz.process_maintain_script(duplicate-string)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:239:15:H2309:Newline should take place right after starting bracket '{' in a multiline dict expression(multiline-comprehension)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:242:59:H2309:Closing bracket '}' should take up a whole line and left-align with the statement(multiline-comprehension)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:244:4:H2101:Method name "do_GET" doesn't conform to snake_case naming styleMyHTTPRequestHandler.do_GET(huawei-invalid-name)
+D:\Homework\CloudHTTPRequestSystem\python_security_empty.py:262:4:H2101:Method name "do_POST" doesn't conform to snake_case naming styleMyHTTPRequestHandler.do_POST(huawei-invalid-name)
+
+-----------------------------------
+Your code has been rated at 9.94/10
+

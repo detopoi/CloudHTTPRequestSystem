@@ -1,0 +1,28 @@
+{
+    "summary": [
+        {
+            "engine_name": "bandit",
+            "success_rate": "100.00%",
+            "success_file_count": "1",
+            "failed_file_count": "0",
+            "total_cost_time": "1",
+            "success_file_list": [
+                "D:\\Homework\\CloudHTTPRequestSystem/python_security_empty.py"
+            ],
+            "failed_file_list": [],
+            "scan_time": []
+        },
+        {
+            "engine_name": "pyinspect",
+            "success_rate": "100.00%",
+            "success_file_count": "1",
+            "failed_file_count": "0",
+            "total_cost_time": "0",
+            "success_file_list": [
+                "D:\\Homework\\CloudHTTPRequestSystem/python_security_empty.py"
+            ],
+            "failed_file_list": [],
+            "scan_time": []
+        }
+    ]
+}

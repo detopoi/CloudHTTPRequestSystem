@@ -1,3 +1,7 @@
+# !/usr/bin/env python
+# coding=utf-8/# -*- coding: utf-8 -*-
+# Copyright Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
+
 import json
 import logging
 import random
@@ -51,6 +55,7 @@ class MaintainBiz():
         file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
         if not os.path.exists(file_path):
             MaintainBiz.today_ids, MaintainBiz.today_database = set(), set()
+            MaintainBiz.save_today_user_data({}, {})
         with open(file_path, 'r') as user_file:
             data = json.load(user_file)
             MaintainBiz.today_ids, MaintainBiz.today_database = \
@@ -62,7 +67,8 @@ class MaintainBiz():
         today_date = datetime.now().strftime("%Y%m%d")
         file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
         data = {'user_ids': list(user_ids), 'usernames': list(usernames)}
-        with open(file_path, 'w') as user_file:
+        fd = os.open(file_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
+        with os.fdopen(fd, 'w') as user_file:
             json.dump(data, user_file, indent=4, ensure_ascii=False)
 
     @staticmethod
@@ -118,8 +124,10 @@ class MaintainBiz():
 
         file_path = f"./user_data/USER-{user_id}.json"
         try:
-            with open(file_path, 'w') as user_file:
+            fd = os.open(file_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
+            with os.fdopen(fd, 'w') as user_file:
                 json.dump(user_data, user_file, indent=4, ensure_ascii=False)
+
         except Exception as e:
             return {'status': 'fail', 'message': str(e)}
 
@@ -139,7 +147,7 @@ class MaintainBiz():
         @param user_id
         @return: details of user's information
         """
-        if type(user_id) == list:
+        if isinstance(user_id, list):
             user_id = user_id[0]
         user_id = str(user_id)
         if len(user_id) != 8:
@@ -192,7 +200,10 @@ class MaintainBiz():
     @staticmethod
     def log_operation(user_id, script_path, result):
         """ Record the operated information """
-        with open(MaintainBiz.log_file, 'a') as log_file:
+        # with open(MaintainBiz.log_file, 'a') as log_file:
+        #     log_file.write(f"{datetime.now()} - User ID: {user_id}, Script: {script_path}, Result: {result}\n")
+        fd = os.open(MaintainBiz.log_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
+        with os.fdopen(fd, 'w') as log_file:
             log_file.write(f"{datetime.now()} - User ID: {user_id}, Script: {script_path}, Result: {result}\n")
 
     @staticmethod
@@ -218,7 +229,7 @@ class MaintainBiz():
             return {"status": 'success', "message": output}
         except Exception as e:
             error_message = str(e)
-            print(f"Command failed with error: {error_message}")
+            # print(f"Command failed with error: {error_message}")
             MaintainBiz.log_operation(user_id, script_name, f"Execution failed. Error: {error_message}")
             return {'status': 'fail', 'message': error_message}
 

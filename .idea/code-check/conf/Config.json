@@ -1,0 +1,672 @@
+{
+  "taskId" : "1729849991003",
+  "language" : [ "PYTHON" ],
+  "projectRoot" : "D:\\Homework\\CloudHTTPRequestSystem",
+  "sourceFiles" : [ "python_security_empty.py" ],
+  "fileSuffixes" : {
+    "functioncap" : [ "cc", "mm", "hh", "rs", "cpp", "cxx", "c++", "c", "inl", "h", "go", "js", "hpp", "hxx", "h++", "py", "*", "cp", "jsx", "java", "lua", "asm", "inc" ],
+    "compilerwarningsparser" : [ "*" ],
+    "ecc" : [ "c", "h" ],
+    "pmd" : [ "java" ],
+    "codemars" : [ "*" ],
+    "fixbotengine-cxx" : [ "cc", "hh", "mm", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "cmetrics" : [ "cc", "mm", "hh", "rs", "cpp", "cxx", "c++", "c", "inl", "h", "go", "js", "hpp", "hxx", "h++", "py", "*", "cp", "jsx", "java", "lua", "asm", "inc" ],
+    "rustfmt" : [ "rs" ],
+    "infusion" : [ "cc", "cpp", "java", "c", "ph", "h", "inc" ],
+    "apidiscovery" : [ "java", "xml", "go", "yml", "jar", "class", "properties", "yaml" ],
+    "wnpythoncodecheck" : [ "py" ],
+    "checkstyle" : [ "java" ],
+    "codefolder" : [ "*" ],
+    "cpplint" : [ "cc", "hh", "mm", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "superchecker" : [ "java" ],
+    "atia" : [ "cpp", " hpp" ],
+    "miriguard" : [ "rs" ],
+    "cooddy" : [ "*" ],
+    "specchecker" : [ "cc", "mm", "hh", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "tscancode" : [ "cc", "cpp", "c", "h" ],
+    "apiengine" : [ "ets", "ts" ],
+    "pclint-plus" : [ "cc", "hh", "mm", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "flexelint" : [ "cc", "hh", "mm", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "commitlog" : [ "*" ],
+    "goarch" : [ "go" ],
+    "pythonchecker" : [ "py" ],
+    "testcodechecker" : [ "cc", "cpp", "java", "c", "h", "go", "hpp", "py" ],
+    "sccheck" : [ "java" ],
+    "fixbot-pclintplus" : [ "cc", "mm", "hh", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "tpp", "txx", "inc" ],
+    "wetrace" : [ "c", "h" ],
+    "wukong" : [ "*" ],
+    "checkstylechecker" : [ "java" ],
+    "fixbotengine-java" : [ "java" ],
+    "woodpecker" : [ "*" ],
+    "clippy" : [ "rs" ],
+    "flake8" : [ "py" ],
+    "eslint" : [ "ux", "vue", "tsx", "js", "jsx", "ts" ],
+    "clangtidy" : [ "cc", "hh", "mm", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "cppcheck" : [ "cc", "hh", "mm", "cpp", "cxx", "c++", "c", "inl", "h", "hpp", "hxx", "h++", "cp", "inc" ],
+    "seccode" : [ "*" ],
+    "spotbugs" : [ "java" ],
+    "gostyle" : [ "go" ],
+    "ucfn" : [ "*" ],
+    "anystandard" : [ "lua" ],
+    "sonarqube" : [ "*" ],
+    "secmissile" : [ "*" ],
+    "molint" : [ "cpp", "c" ],
+    "pmd-p3c" : [ "java" ],
+    "microcode" : [ "p5", "h", "asm" ],
+    "rubocop" : [ "rb", "tc", "ts" ],
+    "fortify" : [ "*" ],
+    "secbrella" : [ "htm", "vue", "tsx", "js", "py", "*", "html", "jsx", "ts" ],
+    "binscope" : [ "*" ],
+    "chat" : [ "*" ],
+    "pylint" : [ "py" ],
+    "golint" : [ "go" ],
+    "sensitiveinfodiscovery" : [ "*" ],
+    "fmc" : [ "*" ],
+    "codecheckrevive" : [ "go" ]
+  },
+  "properties" : {
+    "functioncap" : {
+      "checkPath" : "\"D:\\Homework\\CloudHTTPRequestSystem\\python_security_empty.py\""
+    },
+    "pylint" : {
+      "pythonVersion" : "python3"
+    },
+    "codemars" : {
+      "pythonVersion" : "python3"
+    },
+    "cmetrics" : {
+      "checkPath" : "\"D:\\Homework\\CloudHTTPRequestSystem\\python_security_empty.py\""
+    },
+    "codecheck" : {
+      "exclude" : ""
+    },
+    "flake8" : {
+      "pythonVersion" : "python3"
+    }
+  },
+  "runtimeEnv" : {
+    "jrePath" : "C:\\Users\\l00906571\\.hicode\\CodeCheck\\CodeCheckAgent\\uccp-app-1.0.0\\tools\\jre11\\bin\\java.exe"
+  },
+  "mode" : 2,
+  "languageSupports" : [ {
+    "fileSuffixes" : [ "py" ],
+    "language" : "python"
+  } ],
+  "ruleSets" : [ {
+    "toolRules" : [ {
+      "rules" : [ {
+        "ruleName" : "BD_unzip_file_without_check_size",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_use_logging_tool_to_record_log",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_use_open_without_close",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_linux_commands_wildcard_injection",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_use_mktemp",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_divide_by_zero",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_use_socket_in_insecure_channel",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_store_sensitive_data",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_use_socket_without_close",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_subprocess_with_shell_equals_true",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_insecure_random_func",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_use_return_replace_stopiter",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_yaml_load",
+        "args" : [ ]
+      }, {
+        "ruleName" : "Public_Url_Check",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_exception_info_leak",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_serialize_sensitive_data",
+        "args" : [ ]
+      }, {
+        "ruleName" : "Personal_Info_Check",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_use_dbg",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_communicate_need_set_timeout",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_start_process_with_environment_path",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_try_except_ignore",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_assert_used",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_create_file_with_bad_permission",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_leak_sensitive_data_in_log",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_not_recommended_log_usage",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_use_jsonpickle_encode",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_forbid_negative_step_value_slice",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_insecure_regex",
+        "args" : [ ]
+      }, {
+        "ruleName" : "BD_delete_temporary_file",
+        "args" : [ ]
+      } ],
+      "toolName" : "codemars"
+    }, {
+      "rules" : [ {
+        "ruleName" : "huge_cca_cyclomatic_complexity",
+        "args" : [ {
+          "value" : "20",
+          "key" : "threshold"
+        }, {
+          "value" : "20",
+          "key" : "threshold_modify"
+        } ]
+      }, {
+        "ruleName" : "huge_folder",
+        "args" : [ {
+          "value" : "50",
+          "key" : "threshold"
+        } ]
+      }, {
+        "ruleName" : "huge_non_headerfile",
+        "args" : [ {
+          "value" : "2000",
+          "key" : "threshold_modify"
+        }, {
+          "value" : "2000",
+          "key" : "threshold"
+        } ]
+      }, {
+        "ruleName" : "huge_depth",
+        "args" : [ {
+          "value" : "4",
+          "key" : "threshold_modify"
+        }, {
+          "value" : "4",
+          "key" : "threshold"
+        } ]
+      }, {
+        "ruleName" : "duplication_file",
+        "args" : [ ]
+      }, {
+        "ruleName" : "huge_cyclomatic_complexity",
+        "args" : [ {
+          "value" : "20",
+          "key" : "threshold_modify"
+        }, {
+          "value" : "20",
+          "key" : "threshold"
+        } ]
+      }, {
+        "ruleName" : "warning_suppression",
+        "args" : [ ]
+      }, {
+        "ruleName" : "huge_method",
+        "args" : [ {
+          "value" : "50",
+          "key" : "threshold"
+        }, {
+          "value" : "50",
+          "key" : "threshold_modify"
+        } ]
+      }, {
+        "ruleName" : "redundant_code",
+        "args" : [ ]
+      }, {
+        "ruleName" : "duplication_code",
+        "args" : [ {
+          "value" : "10",
+          "key" : "duplication_code_slice"
+        } ]
+      }, {
+        "ruleName" : "huge_headerfile",
+        "args" : [ {
+          "value" : "500",
+          "key" : "threshold_modify"
+        }, {
+          "value" : "500",
+          "key" : "threshold"
+        } ]
+      } ],
+      "toolName" : "cmetrics"
+    }, {
+      "rules" : [ {
+        "ruleName" : "E262",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E241",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E221",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E101",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E222",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E201",
+        "args" : [ ]
+      }, {
+        "ruleName" : "F632",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E202",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E301",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E203",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E225",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E302",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E401",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E227",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E228",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E701",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E306",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E702",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E704",
+        "args" : [ ]
+      }, {
+        "ruleName" : "DTZ005",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W191",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E271",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E272",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E251",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E252",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E231",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E275",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E111",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E211",
+        "args" : [ ]
+      }, {
+        "ruleName" : "F403",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E117",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E713",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E714",
+        "args" : [ ]
+      } ],
+      "toolName" : "flake8"
+    }, {
+      "rules" : [ {
+        "ruleName" : "functioncap fake rule",
+        "args" : [ ]
+      } ],
+      "toolName" : "functioncap"
+    }, {
+      "rules" : [ {
+        "ruleName" : "H3407",
+        "args" : [ {
+          "value" : "yes",
+          "key" : "check-function-ret"
+        }, {
+          "value" : "",
+          "key" : "function-ret-list"
+        } ]
+      }, {
+        "ruleName" : "H3605",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3602",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3402",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0718",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3601",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3403",
+        "args" : [ {
+          "value" : "5",
+          "key" : "max-args-huawei"
+        } ]
+      }, {
+        "ruleName" : "W0719",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3202",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3203",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0118",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0119",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0117",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0643",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3608",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0601",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3606",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3607",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0109",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0202",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H0302",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0200",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H2205",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H2206",
+        "args" : [ {
+          "value" : "#\\s*(版权所有|Copyright)",
+          "key" : "copyright-pattern"
+        }, {
+          "value" : "#!/usr/bin/env\\s*python|#!/usr/bin/python",
+          "key" : "shebang-pattern"
+        }, {
+          "value" : "#\\s*-\\*-\\s*coding:\\s*utf-8\\s*-\\*-|#\\s*coding\\s*=\\s*utf-8|#\\s*coding:\\s*utf-8",
+          "key" : "encoding-pattern"
+        } ]
+      }, {
+        "ruleName" : "H4702",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0706",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0310",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0121",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0311",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0708",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H0301",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0120",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0312",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0313",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0327",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0150",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0236",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0237",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W1802",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W1801",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3703",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0411",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3109",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3901",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3704",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3107",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3305",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3306",
+        "args" : [ ]
+      }, {
+        "ruleName" : "R0916",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3103",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E1111",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H0311",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3148",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0303",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3222",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0304",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0301",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3221",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0307",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0308",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0305",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0306",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0309",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0102",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0622",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W1117",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0702",
+        "args" : [ ]
+      }, {
+        "ruleName" : "C0301",
+        "args" : [ {
+          "value" : "120",
+          "key" : "max-line-length"
+        } ]
+      }, {
+        "ruleName" : "H3712",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H2305",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3713",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H2104",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3710",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0211",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H2105",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3711",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3112",
+        "args" : [ {
+          "value" : "optparse,tkinter.tix,ConfigParser",
+          "key" : "huawei-deprecated-modules"
+        } ]
+      }, {
+        "ruleName" : "H2101",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H4004",
+        "args" : [ ]
+      }, {
+        "ruleName" : "E0213",
+        "args" : [ ]
+      }, {
+        "ruleName" : "H3111",
+        "args" : [ {
+          "value" : "optparse,tkinter.tix,ConfigParser",
+          "key" : "huawei-deprecated-modules"
+        } ]
+      }, {
+        "ruleName" : "W0135",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0212",
+        "args" : [ {
+          "value" : "asdict,_fields,_replace,_source,_make",
+          "key" : "exclude-protected"
+        } ]
+      }, {
+        "ruleName" : "W0410",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W0137",
+        "args" : [ ]
+      }, {
+        "ruleName" : "W1505",
+        "args" : [ {
+          "value" : "optparse,tkinter.tix,ConfigParser",
+          "key" : "huawei-deprecated-modules"
+        } ]
+      }, {
+        "ruleName" : "H2309",
+        "args" : [ ]
+      } ],
+      "toolName" : "pylint"
+    } ],
+    "language" : "python"
+  } ]
+}

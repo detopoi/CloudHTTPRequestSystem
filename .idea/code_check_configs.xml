@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CodeCheckProjectSettings">
+    <option name="COrCppJsonPath" value="" />
+    <option name="branch" value="dev" />
+    <option name="excludeRegex" value="" />
+    <option name="luaPolicyPath" value="" />
+    <option name="luaSearchPath" value="" />
+    <option name="modifyConfig" value="true" />
+    <option name="repoTaskIdsMap">
+      <map>
+        <entry key="https://github.com/detopoi/cloudhttprequestsystem.git">
+          <value>
+            <set>
+              <option value="" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="repositoryUrl" value="https://github.com/detopoi/CloudHTTPRequestSystem.git" />
+  </component>
+</project>
