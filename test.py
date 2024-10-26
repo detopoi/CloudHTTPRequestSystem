@@ -1,3 +1,7 @@
+# !/usr/bin/env python
+# coding=utf-8/# -*- coding: utf-8 -*-
+# Copyright Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
+
 import json
 import requests
 

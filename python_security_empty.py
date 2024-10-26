@@ -26,21 +26,22 @@ logging.basicConfig(
 
 
 class MaintainBiz():
-    database_folder = "database_user"
+    database_file = "database_user/database.json"
     user_folder = "user_data"
     script_directory = "scripts"
     log_file = 'operation.log'
-    today_database = set()
-    today_ids = set()
+    all_users = {"user_ids": set(), "usernames": set()}
 
     def __init__(self):
-        MaintainBiz.get_today_user_data()
+        MaintainBiz.get_all_user_data()
 
     @staticmethod
-    def ensure_database_folder():
+    def ensure_database_file():
         """ Check the path of the database"""
-        if not os.path.exists(MaintainBiz.database_folder):
-            os.makedirs(MaintainBiz.database_folder)
+        if not os.path.exists(MaintainBiz.database_file):
+            os.makedirs(os.path.dirname(MaintainBiz.database_file), exist_ok=True)
+            with open(MaintainBiz.database_file, 'w') as db_file:
+                json.dump({"user_ids": [], "usernames": []}, db_file)
 
     @staticmethod
     def ensure_script_folder():
@@ -49,33 +50,28 @@ class MaintainBiz():
             os.makedirs(MaintainBiz.script_directory)
 
     @staticmethod
-    def get_today_user_data():
-        """ Extract all registered users of today"""
-        today_date = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
-        file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
-        if not os.path.exists(file_path):
-            MaintainBiz.today_ids, MaintainBiz.today_database = set(), set()
-            MaintainBiz.save_today_user_data(MaintainBiz.today_ids, MaintainBiz.today_database)
+    def get_all_user_data():
+        """Load all user data from the database file"""
+        MaintainBiz.ensure_database_file()
         try:
-            with open(file_path, 'r') as user_file:
-                data = json.load(user_file)
-                MaintainBiz.today_ids = set(data.get('user_ids', []))
-                MaintainBiz.today_database = set(data.get('usernames', []))
+            with open(MaintainBiz.database_file, 'r') as db_file:
+                data = json.load(db_file)
+                MaintainBiz.all_users["user_ids"] = set(data.get("user_ids", []))
+                MaintainBiz.all_users["usernames"] = set(data.get("usernames", []))
         except json.JSONDecodeError:
-            logging.error(f"Empty or malformed JSON in {file_path}. Initializing with empty data.")
-            MaintainBiz.today_ids, MaintainBiz.today_database = set(), set()
-            MaintainBiz.save_today_user_data(MaintainBiz.today_ids, MaintainBiz.today_database)
-        except Exception as e:
-            logging.error(f"Unexpected error opening {file_path}: {e}")
+            logging.error("Empty or malformed JSON in %s. Initializing with empty data.", MaintainBiz.database_file)
+            MaintainBiz.all_users = {"user_ids": set(), "usernames": set()}
+            MaintainBiz.save_all_user_data()
 
     @staticmethod
-    def save_today_user_data(user_ids, usernames):
+    def save_all_user_data():
         """ Save the data of all users today"""
-        today_date = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
-        file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
-        data = {'user_ids': list(user_ids), 'usernames': list(usernames)}
-        with open(file_path, 'w') as user_file:
-            json.dump(data, user_file, indent=4, ensure_ascii=False)
+        data = {
+            "user_ids": list(MaintainBiz.all_users["user_ids"]),
+            "usernames": list(MaintainBiz.all_users["usernames"])
+        }
+        with open(MaintainBiz.database_file, 'w') as db_file:
+            json.dump(data, db_file, indent=4, ensure_ascii=False)
 
     @staticmethod
     def generate_user_id():
@@ -94,18 +90,14 @@ class MaintainBiz():
 
         @return: (if the username has been taken)
         """
-        MaintainBiz.get_today_user_data()
-        return username in MaintainBiz.today_database
+        MaintainBiz.get_all_user_data()
+        return username in MaintainBiz.all_users["usernames"]
 
     @staticmethod
     def register_user(**user_info):
-        """ Automatically register a new account for user
-
-        @param user_info
-        @return: (if the registration is successful)
-        """
+        """Register a new user if the username is not taken"""
         name, username, password, email, phone_number, description = (
-            user_info.get('name'), user_info.get("username"), user_info.get("password"),
+            user_info.get("name"), user_info.get("username"), user_info.get("password"),
             user_info.get("email"), user_info.get("phone_number"), user_info.get("description")
         )
 
@@ -115,7 +107,7 @@ class MaintainBiz():
         if MaintainBiz.is_username_taken(username):
             return {'status': 'fail', 'message': 'Username has been used'}
 
-        # Using bcrypt to hash process the password
+        # Using bcrypt to hash the password
         password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
         user_id = MaintainBiz.generate_user_id()
@@ -131,20 +123,17 @@ class MaintainBiz():
 
         file_path = f"./user_data/USER-{user_id}.json"
         try:
-            fd = os.open(file_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
-            with os.fdopen(fd, 'w') as user_file:
+            with open(file_path, 'w') as user_file:
                 json.dump(user_data, user_file, indent=4, ensure_ascii=False)
         except Exception as e:
             return {'status': 'fail', 'message': str(e)}
 
-        # Update the user id and the set for all users
-        MaintainBiz.get_today_user_data()
-        user_ids, usernames = MaintainBiz.today_ids, MaintainBiz.today_database
-        user_ids.add(user_id)
-        usernames.add(username)
-        MaintainBiz.save_today_user_data(user_ids, usernames)
+        # Update the global users set and save the updated data
+        MaintainBiz.all_users["user_ids"].add(user_id)
+        MaintainBiz.all_users["usernames"].add(username)
+        MaintainBiz.save_all_user_data()
 
-        return {'status': 'success', 'message': "Successfully create a account with: "+str(user_data)}
+        return {'status': 'success', 'message': "Successfully created an account with: " + str(user_data)}
 
     @staticmethod
     def try_query_user_info(user_data):
@@ -166,12 +155,12 @@ class MaintainBiz():
         if isinstance(user_id, list):
             user_id = user_id[0]
         user_id = str(user_id)
-        if len(user_id) != 8:
-            return {'status': 'fail', 'message': f"Wrong id format, expect 8 digits but got {len(user_id)}"}
+        if len(user_id) != 16:
+            return {'status': 'fail', 'message': f"Wrong id format, expect 16 digits but got {len(user_id)}"}
         for user_data in os.listdir('./user_data'):
-            data_id = user_data[13:21]
+            data_id = user_data[5:21]
             if user_id == data_id:
-                MaintainBiz.try_query_user_info(user_data)
+                return MaintainBiz.try_query_user_info(user_data)
         return {'status': 'fail', 'message': "User not found"}
 
     @staticmethod
@@ -285,7 +274,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
                 response.write(b'Not supported request')
                 self.send_response(404)
         except Exception as e:
-            logging.error(f"Error during processing request: {e}")
+            logging.error("Error during processing request: %s", e)
             self.send_response(500)
             response.write(b'Internal server error')
         self.end_headers()

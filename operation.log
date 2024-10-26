@@ -1,1 +1,1 @@
-2024-10-26 07:06:55.848932+00:00 - User ID: awd, Script: test1.sh, Result: Execution failed. Error: Command '['bash', 'scripts/test1.sh', '--user_id=awd', '--script_name=test1.sh']' returned non-zero exit status 1.
+2024-10-26 08:02:36.232584+00:00 - User ID: adf, Script: test1.sh, Result: Execution failed. Error: Command '['bash', 'scripts/test1.sh', '--user_id=adf', '--script_name=test1.sh']' returned non-zero exit status 1.
