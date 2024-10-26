@@ -1,1 +1,1 @@
-2024-10-25 17:58:36.391551 - User ID: qawd, Script: test1.sh, Result: Execution failed. Error: [WinError 2] 系统找不到指定的文件。
+2024-10-26 07:06:55.848932+00:00 - User ID: awd, Script: test1.sh, Result: Execution failed. Error: Command '['bash', 'scripts/test1.sh', '--user_id=awd', '--script_name=test1.sh']' returned non-zero exit status 1.

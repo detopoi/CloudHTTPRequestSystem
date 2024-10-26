@@ -4,16 +4,16 @@
 
 import json
 import logging
-import random
+import secrets
 import os
 import subprocess
 import zipfile
-from datetime import datetime
-from http.server import BaseHTTPRequestHandler
-from http.server import HTTPServer
+import ssl
+import bcrypt
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from io import BytesIO
-from urllib.parse import parse_qs
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 DATE_FORMAT = "%m/%d/%Y %H:%M:%S %p"
@@ -30,8 +30,8 @@ class MaintainBiz():
     user_folder = "user_data"
     script_directory = "scripts"
     log_file = 'operation.log'
-    today_database = {}
-    today_ids = {}
+    today_database = set()
+    today_ids = set()
 
     def __init__(self):
         MaintainBiz.get_today_user_data()
@@ -51,24 +51,30 @@ class MaintainBiz():
     @staticmethod
     def get_today_user_data():
         """ Extract all registered users of today"""
-        today_date = datetime.now().strftime("%Y%m%d")
+        today_date = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
         file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
         if not os.path.exists(file_path):
             MaintainBiz.today_ids, MaintainBiz.today_database = set(), set()
-            MaintainBiz.save_today_user_data({}, {})
-        with open(file_path, 'r') as user_file:
-            data = json.load(user_file)
-            MaintainBiz.today_ids, MaintainBiz.today_database = \
-                set(data.get('user_ids', [])), set(data.get('usernames', []))
+            MaintainBiz.save_today_user_data(MaintainBiz.today_ids, MaintainBiz.today_database)
+        try:
+            with open(file_path, 'r') as user_file:
+                data = json.load(user_file)
+                MaintainBiz.today_ids = set(data.get('user_ids', []))
+                MaintainBiz.today_database = set(data.get('usernames', []))
+        except json.JSONDecodeError:
+            logging.error(f"Empty or malformed JSON in {file_path}. Initializing with empty data.")
+            MaintainBiz.today_ids, MaintainBiz.today_database = set(), set()
+            MaintainBiz.save_today_user_data(MaintainBiz.today_ids, MaintainBiz.today_database)
+        except Exception as e:
+            logging.error(f"Unexpected error opening {file_path}: {e}")
 
     @staticmethod
     def save_today_user_data(user_ids, usernames):
         """ Save the data of all users today"""
-        today_date = datetime.now().strftime("%Y%m%d")
+        today_date = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
         file_path = os.path.join(MaintainBiz.database_folder, f"{today_date}.json")
         data = {'user_ids': list(user_ids), 'usernames': list(usernames)}
-        fd = os.open(file_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
-        with os.fdopen(fd, 'w') as user_file:
+        with open(file_path, 'w') as user_file:
             json.dump(data, user_file, indent=4, ensure_ascii=False)
 
     @staticmethod
@@ -77,12 +83,10 @@ class MaintainBiz():
 
         @return: new id
         """
-        date_str = datetime.now().strftime("%Y%m%d")
-        random_num = random.randint(0, 99999999)
-        zeros = 8-len(str(random_num))
-        if zeros > 0:
-            return date_str + "0"*zeros + str(random_num)
-        return f"{date_str}{random_num}"
+        date_str = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
+        random_num = secrets.randbelow(100000000)
+        zeros = 8 - len(str(random_num))
+        return f"{date_str}{'0' * zeros}{random_num}"
 
     @staticmethod
     def is_username_taken(username):
@@ -111,12 +115,15 @@ class MaintainBiz():
         if MaintainBiz.is_username_taken(username):
             return {'status': 'fail', 'message': 'Username has been used'}
 
+        # Using bcrypt to hash process the password
+        password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
         user_id = MaintainBiz.generate_user_id()
         user_data = {
             "name": name,
             "user_id": user_id,
             "username": username,
-            "password": password,
+            "password": password_hash,
             "email": email,
             "phone_number": phone_number,
             "description": description
@@ -127,7 +134,6 @@ class MaintainBiz():
             fd = os.open(file_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
             with os.fdopen(fd, 'w') as user_file:
                 json.dump(user_data, user_file, indent=4, ensure_ascii=False)
-
         except Exception as e:
             return {'status': 'fail', 'message': str(e)}
 
@@ -139,6 +145,16 @@ class MaintainBiz():
         MaintainBiz.save_today_user_data(user_ids, usernames)
 
         return {'status': 'success', 'message': "Successfully create a account with: "+str(user_data)}
+
+    @staticmethod
+    def try_query_user_info(user_data):
+        file_path = os.path.join(MaintainBiz.user_folder, user_data)
+        try:
+            with open(file_path, 'r') as user_file:
+                data = json.load(user_file)
+        except Exception as e:
+            return {'status': 'fail', 'message': "Error: " + str(e)}
+        return {'status': 'success', 'message': data}
 
     @staticmethod
     def query_user_info(user_id):
@@ -155,13 +171,7 @@ class MaintainBiz():
         for user_data in os.listdir('./user_data'):
             data_id = user_data[13:21]
             if user_id == data_id:
-                file_path = os.path.join(MaintainBiz.user_folder, user_data)
-                try:
-                    with open(file_path, 'r') as user_file:
-                        data = json.load(user_file)
-                except Exception as e:
-                    return {'status': 'fail', 'message': "Error: "+str(e)}
-                return {'status': 'success', 'message': data}
+                MaintainBiz.try_query_user_info(user_data)
         return {'status': 'fail', 'message': "User not found"}
 
     @staticmethod
@@ -200,17 +210,17 @@ class MaintainBiz():
     @staticmethod
     def log_operation(user_id, script_path, result):
         """ Record the operated information """
-        # with open(MaintainBiz.log_file, 'a') as log_file:
-        #     log_file.write(f"{datetime.now()} - User ID: {user_id}, Script: {script_path}, Result: {result}\n")
         fd = os.open(MaintainBiz.log_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
         with os.fdopen(fd, 'w') as log_file:
-            log_file.write(f"{datetime.now()} - User ID: {user_id}, Script: {script_path}, Result: {result}\n")
+            log_file.write(f"{datetime.now(tz=timezone.utc)} - " +
+                           f"User ID: {user_id}, Script: {script_path}, Result: {result}\n")
 
     @staticmethod
     def process_maintain_script(**kwargs):
         """ Execute test tasks
 
-        @param kwargs: executing script, parameters, executing user {'script_name': xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
+        @param kwargs: executing script, parameters,
+                       executing user {'script_name': xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
         @return: 'success'/'fail' {'script_name':xxxx, 'args': ['yyy', 'zzz'], 'user_id': id}
         """
         script_name = kwargs.get('script_name')
@@ -229,16 +239,17 @@ class MaintainBiz():
             return {"status": 'success', "message": output}
         except Exception as e:
             error_message = str(e)
-            # print(f"Command failed with error: {error_message}")
             MaintainBiz.log_operation(user_id, script_name, f"Execution failed. Error: {error_message}")
             return {'status': 'fail', 'message': error_message}
 
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
-    func_map = {'/register_user': MaintainBiz.register_user,
-                '/query_user_info': MaintainBiz.query_user_info,
-                '/process_maintain_script': MaintainBiz.process_maintain_script,
-                '/upload_script': MaintainBiz.upload_script}
+    func_map = {
+        '/register_user': MaintainBiz.register_user,
+        '/query_user_info': MaintainBiz.query_user_info,
+        '/process_maintain_script': MaintainBiz.process_maintain_script,
+        '/upload_script': MaintainBiz.upload_script
+    }
 
     def do_GET(self):
         url_result = urlsplit(self.path)
@@ -260,24 +271,31 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
-        input_body = json.loads(
-            str(self.rfile.read(content_length), encoding='utf-8'))
+        input_body = json.loads(self.rfile.read(content_length).decode('utf-8'))
         url_result = urlsplit(self.path)
         url_path = url_result.path
         func = self.func_map.get(url_path, None)
         response = BytesIO()
-        if func:
-            json_data = func(**input_body)
-            response.write(bytes(json.dumps(json_data), encoding='utf8'))
-            self.send_response(200)
-        else:
-            response.write(b'not support request')
-            self.send_response(404)
-
+        try:
+            if func:
+                json_data = func(**input_body)
+                response.write(bytes(json.dumps(json_data), encoding='utf8'))
+                self.send_response(200)
+            else:
+                response.write(b'Not supported request')
+                self.send_response(404)
+        except Exception as e:
+            logging.error(f"Error during processing request: {e}")
+            self.send_response(500)
+            response.write(b'Internal server error')
         self.end_headers()
         self.wfile.write(response.getvalue())
 
 
 if __name__ == '__main__':
-    httpd = HTTPServer(('localhost', 8000), MyHTTPRequestHandler)
+    server_address = ('localhost', 8000)
+    httpd = HTTPServer(server_address, MyHTTPRequestHandler)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.load_cert_chain(certfile=r".\certfile\certificate.crt", keyfile=r".\certfile\private.key")
+    httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
     httpd.serve_forever()

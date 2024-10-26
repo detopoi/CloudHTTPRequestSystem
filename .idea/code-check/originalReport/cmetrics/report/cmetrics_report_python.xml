@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <code_metrics>
 <summary_metrics>
-  <code_size>202</code_size>
-  <raw_lines>284</raw_lines>
+  <code_size>211</code_size>
+  <raw_lines>290</raw_lines>
   <methods_total>14</methods_total>
-  <cyclomatic_complexity_total>43</cyclomatic_complexity_total>
-  <cyclomatic_complexity_per_method>3.07</cyclomatic_complexity_per_method>
+  <cyclomatic_complexity_total>42</cyclomatic_complexity_total>
+  <cyclomatic_complexity_per_method>3.0</cyclomatic_complexity_per_method>
   <maximum_cyclomatic_complexity>7</maximum_cyclomatic_complexity>
   <huge_cyclomatic_complexity_total>0</huge_cyclomatic_complexity_total>
   <huge_cyclomatic_complexity_ratio>0.0</huge_cyclomatic_complexity_ratio>
-  <cca_cyclomatic_complexity_total>43</cca_cyclomatic_complexity_total>
-  <cca_cyclomatic_complexity_per_method>3.07</cca_cyclomatic_complexity_per_method>
+  <cca_cyclomatic_complexity_total>42</cca_cyclomatic_complexity_total>
+  <cca_cyclomatic_complexity_per_method>3.0</cca_cyclomatic_complexity_per_method>
   <maximum_cca_cyclomatic_complexity>7</maximum_cca_cyclomatic_complexity>
   <huge_cca_cyclomatic_complexity_total>0</huge_cca_cyclomatic_complexity_total>
   <cyclomatic_complexity_adequacy>100.0</cyclomatic_complexity_adequacy>
-  <maximum_depth>5</maximum_depth>
-  <huge_depth_total>1</huge_depth_total>
-  <huge_depth_ratio>7.14</huge_depth_ratio>
-  <method_lines>143</method_lines>
-  <lines_per_method>10.21</lines_per_method>
+  <maximum_depth>4</maximum_depth>
+  <huge_depth_total>0</huge_depth_total>
+  <huge_depth_ratio>0.0</huge_depth_ratio>
+  <method_lines>146</method_lines>
+  <lines_per_method>10.43</lines_per_method>
   <huge_method_total>0</huge_method_total>
   <huge_method_ratio>0.0</huge_method_ratio>
   <files_total>1</files_total>
   <folders_total>0</folders_total>
-  <lines_per_file>202.0</lines_per_file>
+  <lines_per_file>211.0</lines_per_file>
   <huge_headerfile_total>0</huge_headerfile_total>
   <huge_headerfile_ratio>0.0</huge_headerfile_ratio>
   <huge_non_headerfile_total>0</huge_non_headerfile_total>
@@ -40,7 +40,7 @@
   <non_hfile_code_duplication_ratio>0.0</non_hfile_code_duplication_ratio>
   <unsafe_functions_total>0</unsafe_functions_total>
   <unsafe_functions_kloc>0.0</unsafe_functions_kloc>
-  <redundant_code_total>5</redundant_code_total>
+  <redundant_code_total>0</redundant_code_total>
   <redundant_code_kloc>0.0</redundant_code_kloc>
   <warning_suppression_total>0</warning_suppression_total>
   <warning_suppression_kloc>0.0</warning_suppression_kloc>
@@ -69,9 +69,6 @@
   <unsafe_functions>
   </unsafe_functions>
   <redundant_codes>
-    <file_path name="D:\Homework\CloudHTTPRequestSystem\python_security_empty.py">
-      <line>69, 70, 204, 205, 233</line>
-    </file_path>
   </redundant_codes>
   <warning_suppressions>
   </warning_suppressions>
@@ -111,15 +108,15 @@
       <method>
         <method_name>get_today_user_data()</method_name>
         <start_line>52</start_line>
-        <end_line>61</end_line>
+        <end_line>63</end_line>
         <cyclomatic_complexity>3</cyclomatic_complexity>
         <cca_cyclomatic_complexity>3</cca_cyclomatic_complexity>
         <max_depth>2</max_depth>
-        <nbnc_loc>8</nbnc_loc>
+        <nbnc_loc>10</nbnc_loc>
       </method>
       <method>
         <method_name>save_today_user_data()</method_name>
-        <start_line>64</start_line>
+        <start_line>66</start_line>
         <end_line>73</end_line>
         <cyclomatic_complexity>2</cyclomatic_complexity>
         <cca_cyclomatic_complexity>2</cca_cyclomatic_complexity>
@@ -129,16 +126,16 @@
       <method>
         <method_name>generate_user_id()</method_name>
         <start_line>76</start_line>
-        <end_line>86</end_line>
-        <cyclomatic_complexity>2</cyclomatic_complexity>
-        <cca_cyclomatic_complexity>2</cca_cyclomatic_complexity>
-        <max_depth>2</max_depth>
-        <nbnc_loc>6</nbnc_loc>
+        <end_line>84</end_line>
+        <cyclomatic_complexity>1</cyclomatic_complexity>
+        <cca_cyclomatic_complexity>1</cca_cyclomatic_complexity>
+        <max_depth>1</max_depth>
+        <nbnc_loc>4</nbnc_loc>
       </method>
       <method>
         <method_name>is_username_taken()</method_name>
-        <start_line>89</start_line>
-        <end_line>95</end_line>
+        <start_line>87</start_line>
+        <end_line>93</end_line>
         <cyclomatic_complexity>1</cyclomatic_complexity>
         <cca_cyclomatic_complexity>1</cca_cyclomatic_complexity>
         <max_depth>1</max_depth>
@@ -146,26 +143,26 @@
       </method>
       <method>
         <method_name>register_user()</method_name>
-        <start_line>98</start_line>
+        <start_line>96</start_line>
         <end_line>142</end_line>
         <cyclomatic_complexity>5</cyclomatic_complexity>
         <cca_cyclomatic_complexity>5</cca_cyclomatic_complexity>
         <max_depth>3</max_depth>
-        <nbnc_loc>31</nbnc_loc>
+        <nbnc_loc>32</nbnc_loc>
       </method>
       <method>
         <method_name>query_user_info()</method_name>
         <start_line>145</start_line>
-        <end_line>166</end_line>
+        <end_line>167</end_line>
         <cyclomatic_complexity>7</cyclomatic_complexity>
         <cca_cyclomatic_complexity>7</cca_cyclomatic_complexity>
-        <max_depth>5</max_depth>
-        <nbnc_loc>16</nbnc_loc>
+        <max_depth>4</max_depth>
+        <nbnc_loc>17</nbnc_loc>
       </method>
       <method>
         <method_name>upload_script()</method_name>
-        <start_line>169</start_line>
-        <end_line>199</end_line>
+        <start_line>170</start_line>
+        <end_line>200</end_line>
         <cyclomatic_complexity>5</cyclomatic_complexity>
         <cca_cyclomatic_complexity>5</cca_cyclomatic_complexity>
         <max_depth>3</max_depth>
@@ -173,12 +170,12 @@
       </method>
       <method>
         <method_name>log_operation()</method_name>
-        <start_line>202</start_line>
+        <start_line>203</start_line>
         <end_line>208</end_line>
         <cyclomatic_complexity>2</cyclomatic_complexity>
         <cca_cyclomatic_complexity>2</cca_cyclomatic_complexity>
         <max_depth>2</max_depth>
-        <nbnc_loc>3</nbnc_loc>
+        <nbnc_loc>4</nbnc_loc>
       </method>
       <method>
         <method_name>process_maintain_script()</method_name>
@@ -191,8 +188,8 @@
       </method>
       <method>
         <method_name>do_GET()</method_name>
-        <start_line>244</start_line>
-        <end_line>260</end_line>
+        <start_line>246</start_line>
+        <end_line>262</end_line>
         <cyclomatic_complexity>4</cyclomatic_complexity>
         <cca_cyclomatic_complexity>4</cca_cyclomatic_complexity>
         <max_depth>2</max_depth>
@@ -200,15 +197,15 @@
       </method>
       <method>
         <method_name>do_POST()</method_name>
-        <start_line>262</start_line>
-        <end_line>279</end_line>
+        <start_line>264</start_line>
+        <end_line>281</end_line>
         <cyclomatic_complexity>3</cyclomatic_complexity>
         <cca_cyclomatic_complexity>3</cca_cyclomatic_complexity>
         <max_depth>2</max_depth>
         <nbnc_loc>16</nbnc_loc>
       </method>
       <complex_method>
-        <max_depth_value>5</max_depth_value>
+        <max_depth_value>4</max_depth_value>
         <max_depth_method>query_user_info()</max_depth_method>
         <max_complexity_value>7</max_complexity_value>
         <max_complexity_method>query_user_info()</max_complexity_method>
@@ -218,7 +215,7 @@
     </file_path>
   </method_metrics>
   <file_sizes>
-    <file_size name="D:\Homework\CloudHTTPRequestSystem\python_security_empty.py">202, 284, 0</file_size>
+    <file_size name="D:\Homework\CloudHTTPRequestSystem\python_security_empty.py">211, 290, 0</file_size>
   </file_sizes>
   <huge_folder>
   </huge_folder>
